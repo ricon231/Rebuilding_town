@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://restoration_lab.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/restoration_lab_tier01_poor.png" id="2_tier1"]
+[ext_resource type="Texture2D" path="res://assets/restoration_lab_tier02_institute.png" id="3_tier2"]
+[ext_resource type="Texture2D" path="res://assets/restoration_lab_tier03_royal.png" id="4_tier3"]
+[ext_resource type="Texture2D" path="res://assets/restoration_lab_rubble.png" id="5_rubble"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interaction"]
+size = Vector2(120, 72)
+
+[sub_resource type="StyleBoxFlat" id="StyleProgressBackground"]
+bg_color = Color(0.22, 0.23, 0.25, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.08, 0.08, 0.09, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleProgressFill"]
+bg_color = Color(0.16, 0.72, 0.25, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="RestorationLabBuilding" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Stages" type="Node2D" parent="."]
+
+[node name="Stage0" type="Sprite2D" parent="Stages"]
+texture_filter = 1
+texture = ExtResource("5_rubble")
+
+[node name="Stage1" type="Sprite2D" parent="Stages"]
+visible = false
+texture_filter = 1
+texture = ExtResource("2_tier1")
+
+[node name="Stage2" type="Sprite2D" parent="Stages"]
+visible = false
+texture_filter = 1
+texture = ExtResource("3_tier2")
+
+[node name="Stage3" type="Sprite2D" parent="Stages"]
+visible = false
+texture_filter = 1
+texture = ExtResource("4_tier3")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("RectangleShape2D_interaction")
+
+[node name="PromptAnchor" type="Node2D" parent="."]
+
+[node name="RestorationProgress" type="ProgressBar" parent="."]
+visible = false
+z_index = 4095
+z_as_relative = false
+offset_left = -72.0
+offset_top = 96.0
+offset_right = 72.0
+offset_bottom = 112.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleProgressBackground")
+theme_override_styles/fill = SubResource("StyleProgressFill")
+value = 0.0
+show_percentage = false
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]

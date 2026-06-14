@@ -1,0 +1,193 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://artifact_catalog_ui.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StylePanel"]
+bg_color = Color(0.035, 0.039, 0.047, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.24, 0.28, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleLeft"]
+bg_color = Color(0.055, 0.061, 0.071, 1)
+border_width_right = 1
+border_color = Color(0.18, 0.2, 0.24, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleImage"]
+bg_color = Color(0.02, 0.022, 0.028, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.22, 0.26, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleEmpty"]
+
+[node name="ArtifactCatalogUI" type="CanvasLayer" groups=["artifact_catalog_ui"]]
+visible = false
+process_mode = 3
+layer = 190
+script = ExtResource("1_script")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.82)
+
+[node name="Window" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_left = 0.06
+anchor_top = 0.07
+anchor_right = 0.94
+anchor_bottom = 0.93
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StylePanel")
+
+[node name="MainRow" type="HBoxContainer" parent="Window"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LeftPanel" type="PanelContainer" parent="Window/MainRow"]
+custom_minimum_size = Vector2(410, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleLeft")
+
+[node name="LeftMargin" type="MarginContainer" parent="Window/MainRow/LeftPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 22
+
+[node name="LeftColumn" type="VBoxContainer" parent="Window/MainRow/LeftPanel/LeftMargin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Window/MainRow/LeftPanel/LeftMargin/LeftColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.95, 0.97, 1)
+theme_override_font_sizes/font_size = 26
+text = "유물 도감"
+
+[node name="CounterLabel" type="Label" parent="Window/MainRow/LeftPanel/LeftMargin/LeftColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.53, 0.72, 0.93, 1)
+theme_override_font_sizes/font_size = 14
+
+[node name="Divider" type="HSeparator" parent="Window/MainRow/LeftPanel/LeftMargin/LeftColumn"]
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="Window/MainRow/LeftPanel/LeftMargin/LeftColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemList" type="VBoxContainer" parent="Window/MainRow/LeftPanel/LeftMargin/LeftColumn/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 7
+
+[node name="RightMargin" type="MarginContainer" parent="Window/MainRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 34
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 34
+theme_override_constants/margin_bottom = 24
+
+[node name="RightColumn" type="VBoxContainer" parent="Window/MainRow/RightMargin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TopBar" type="HBoxContainer" parent="Window/MainRow/RightMargin/RightColumn"]
+layout_mode = 2
+
+[node name="ArtifactName" type="Label" parent="Window/MainRow/RightMargin/RightColumn/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.96, 0.96, 0.97, 1)
+theme_override_font_sizes/font_size = 23
+text = "유물을 선택하세요"
+autowrap_mode = 2
+
+[node name="CloseButton" type="Button" parent="Window/MainRow/RightMargin/RightColumn/TopBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 40)
+layout_mode = 2
+text = "×"
+tooltip_text = "닫기"
+
+[node name="EffectTitle" type="Label" parent="Window/MainRow/RightMargin/RightColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93, 0.81, 0.36, 1)
+theme_override_font_sizes/font_size = 15
+text = "해금 효과"
+
+[node name="EffectPanel" type="PanelContainer" parent="Window/MainRow/RightMargin/RightColumn"]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleImage")
+
+[node name="ArtifactEffect" type="RichTextLabel" parent="Window/MainRow/RightMargin/RightColumn/EffectPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/line_separation = 3
+theme_override_font_sizes/normal_font_size = 17
+theme_override_styles/normal = SubResource("StyleEmpty")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+text = "해금 후 효과를 확인할 수 있습니다."
+
+[node name="ArtifactImagePanel" type="PanelContainer" parent="Window/MainRow/RightMargin/RightColumn"]
+custom_minimum_size = Vector2(0, 230)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleImage")
+
+[node name="ArtifactImage" type="TextureRect" parent="Window/MainRow/RightMargin/RightColumn/ArtifactImagePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DescriptionTitle" type="Label" parent="Window/MainRow/RightMargin/RightColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.53, 0.72, 0.93, 1)
+theme_override_font_sizes/font_size = 15
+text = "유물 설명"
+
+[node name="ArtifactDescription" type="RichTextLabel" parent="Window/MainRow/RightMargin/RightColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.78, 0.8, 0.84, 1)
+theme_override_font_sizes/normal_font_size = 17
+theme_override_styles/normal = SubResource("StyleEmpty")
+bbcode_enabled = true
+fit_content = false
+scroll_active = true
+text = "유물을 선택하세요."
+
+[node name="CloseHint" type="Label" parent="Window/MainRow/RightMargin/RightColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.52, 0.57, 1)
+theme_override_font_sizes/font_size = 14
+text = "C 또는 Esc를 누르면 도감을 닫습니다."
+horizontal_alignment = 2

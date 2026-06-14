@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://crb4riv8akudg"]
+
+[ext_resource type="Texture2D" uid="uid://dgrmpai0ygucl" path="res://assets/effect_charge_animation.png" id="1_sheet"]
+
+[sub_resource type="AtlasTexture" id="Frame0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 0, 192, 128)
+
+[sub_resource type="AtlasTexture" id="Frame1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(192, 0, 192, 128)
+
+[sub_resource type="AtlasTexture" id="Frame2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(384, 0, 192, 128)
+
+[sub_resource type="AtlasTexture" id="Frame3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(576, 0, 192, 128)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Frame0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Frame3")
+}],
+"loop": false,
+"name": &"effect",
+"speed": 14.0
+}]

@@ -1,0 +1,79 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dxc8axrmhskrt"]
+
+[ext_resource type="Texture2D" uid="uid://dw24b4bl1bvyc" path="res://assets/animal_bear_walk.png" id="1_move"]
+[ext_resource type="Texture2D" uid="uid://hdwniw5f8wi3" path="res://assets/animal_bear_attack.png" id="2_attack"]
+
+[sub_resource type="AtlasTexture" id="Attack0"]
+atlas = ExtResource("2_attack")
+region = Rect2(0, 0, 256, 224)
+
+[sub_resource type="AtlasTexture" id="Attack1"]
+atlas = ExtResource("2_attack")
+region = Rect2(256, 0, 256, 224)
+
+[sub_resource type="AtlasTexture" id="Attack2"]
+atlas = ExtResource("2_attack")
+region = Rect2(512, 0, 256, 224)
+
+[sub_resource type="AtlasTexture" id="Attack3"]
+atlas = ExtResource("2_attack")
+region = Rect2(768, 0, 256, 224)
+
+[sub_resource type="AtlasTexture" id="Move0"]
+atlas = ExtResource("1_move")
+region = Rect2(0, 0, 320, 224)
+
+[sub_resource type="AtlasTexture" id="Move1"]
+atlas = ExtResource("1_move")
+region = Rect2(320, 0, 320, 224)
+
+[sub_resource type="AtlasTexture" id="Move2"]
+atlas = ExtResource("1_move")
+region = Rect2(640, 0, 320, 224)
+
+[sub_resource type="AtlasTexture" id="Move3"]
+atlas = ExtResource("1_move")
+region = Rect2(960, 0, 320, 224)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.15,
+"texture": SubResource("Attack0")
+}, {
+"duration": 0.9,
+"texture": SubResource("Attack1")
+}, {
+"duration": 0.7,
+"texture": SubResource("Attack2")
+}, {
+"duration": 1.2,
+"texture": SubResource("Attack3")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Move0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Move1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Move2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Move3")
+}, {
+"duration": 1.0,
+"texture": SubResource("Move2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Move1")
+}],
+"loop": true,
+"name": &"move",
+"speed": 6.5
+}]

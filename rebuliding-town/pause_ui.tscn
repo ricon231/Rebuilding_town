@@ -1,0 +1,125 @@
+[gd_scene load_steps=3 format=3 uid="uid://du35stjoe3s8h"]
+
+[ext_resource type="Script" path="res://pause_ui.gd" id="1_2h5qi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleTownStatus"]
+bg_color = Color(0.035, 0.035, 0.04, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.34, 0.58, 0.38, 0.95)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="PauseUI" type="CanvasLayer" unique_id=933131819]
+process_mode = 3
+layer = 200
+script = ExtResource("1_2h5qi")
+
+[node name="Overlay" type="ColorRect" parent="." unique_id=44796332]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.64)
+
+[node name="TownStatusPanel" type="PanelContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -332.0
+offset_top = 82.0
+offset_right = -22.0
+offset_bottom = 306.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleTownStatus")
+
+[node name="TownStatusLabel" type="Label" parent="TownStatusPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.86, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 16
+text = "마을 운영\n주민  0 / 0명\n광산  0단계 · 하루 +0\n대장간  0단계 · 공격 +0%\n관아  0단계 · 수용 0명\n복원소  0단계\n예상 일일 수입  0엽전\n승리 목표  유물 0/10 · 관아 0/4단계"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu" type="PanelContainer" parent="." unique_id=1624017834]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.0
+offset_top = -285.0
+offset_right = 230.0
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonList" type="VBoxContainer" parent="Menu" unique_id=582247340]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Menu/ButtonList"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "일시정지"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Menu/ButtonList"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.72, 0.76, 1)
+theme_override_font_sizes/font_size = 16
+text = "조작 안내"
+horizontal_alignment = 1
+
+[node name="Controls" type="Label" parent="Menu/ButtonList"]
+custom_minimum_size = Vector2(410, 170)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.92, 1)
+theme_override_font_sizes/font_size = 17
+text = "이동            A / D 또는 ← / →\n점프            Space, W 또는 ↑\n공격            마우스 왼쪽 버튼\n건물 복구       E\n유물 복원       복원소에서 1 / 2\n유물 도감       C"
+vertical_alignment = 1
+
+[node name="Divider" type="HSeparator" parent="Menu/ButtonList"]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="Menu/ButtonList" unique_id=1647122870]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 2
+text = "돌아가기"
+
+[node name="SaveButton" type="Button" parent="Menu/ButtonList" unique_id=177571364]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 2
+text = "게임 저장"
+
+[node name="LoadButton" type="Button" parent="Menu/ButtonList"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 2
+text = "게임 불러오기"
+
+[node name="StatusLabel" type="Label" parent="Menu/ButtonList"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(410, 28)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.72, 0.4, 1)
+theme_override_font_sizes/font_size = 15
+horizontal_alignment = 1
+
+[node name="QuitButton" type="Button" parent="Menu/ButtonList" unique_id=89588684]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 2
+text = "게임 종료"

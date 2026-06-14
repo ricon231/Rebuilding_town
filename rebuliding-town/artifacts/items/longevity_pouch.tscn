@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://artifact_item.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://assets/items_museum/red_phoenix_embroidered_pouch_256_damaged.png" id="2_texture"]
+
+[node name="LongevityPouch" instance=ExtResource("1_base")]
+artifact_id = &"longevity_pouch"
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_texture")

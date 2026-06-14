@@ -1,0 +1,296 @@
+[gd_scene format=4 uid="uid://dhb5h63bkwwyu"]
+
+[ext_resource type="Texture2D" uid="uid://cxhttxqvidvpk" path="res://assets/ground_cracked_grass_tiles.png" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://fqxqqm8q2hgn" path="res://player.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://ci653c2reflyf" path="res://day_night_cycle.gd" id="3_4kvod"]
+[ext_resource type="PackedScene" uid="uid://du35stjoe3s8h" path="res://pause_ui.tscn" id="4_5bqsx"]
+[ext_resource type="PackedScene" uid="uid://2hcwqwth4tp3" path="res://blacksmith_building.tscn" id="6_blacksmith"]
+[ext_resource type="PackedScene" path="res://restoration_lab_building.tscn" id="7_lab"]
+[ext_resource type="PackedScene" path="res://mine_building.tscn" id="8_mine"]
+[ext_resource type="PackedScene" uid="uid://idpjomapocmk" path="res://gwana_building.tscn" id="9_gwana"]
+[ext_resource type="PackedScene" path="res://coin.tscn" id="10_coin"]
+[ext_resource type="Texture2D" uid="uid://qyirp6of8osf" path="res://assets/mountain_background_panorama_5760x1080.png" id="16_mountains"]
+[ext_resource type="Script" uid="uid://1stxrs8yko65" path="res://mountain_parallax.gd" id="17_mountain_script"]
+[ext_resource type="Script" uid="uid://doecjsv5yx1bd" path="res://ground_tile_map.gd" id="18_ground_script"]
+[ext_resource type="PackedScene" path="res://artifact_catalog_ui.tscn" id="19_catalog_ui"]
+[ext_resource type="PackedScene" path="res://tree_zelkova_variant01.tscn" id="34_tree_01"]
+[ext_resource type="PackedScene" path="res://tree_zelkova_variant02.tscn" id="35_tree_02"]
+[ext_resource type="PackedScene" path="res://tree_zelkova_variant03.tscn" id="36_tree_03"]
+[ext_resource type="Script" uid="uid://dn0ggv036gh47" path="res://main.gd" id="37_main_script"]
+[ext_resource type="Script" uid="uid://drq1gtpa7qnnb" path="res://mob_spawner.gd" id="38_mob_spawner_script"]
+[ext_resource type="PackedScene" path="res://player_hud.tscn" id="39_player_hud"]
+[ext_resource type="PackedScene" path="res://torch.tscn" id="40_torch"]
+[ext_resource type="PackedScene" path="res://game_over_ui.tscn" id="41_game_over_ui"]
+[ext_resource type="PackedScene" path="res://defense_wall.tscn" id="42_defense_wall"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h2yge"]
+texture = ExtResource("1_0xm2m")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_1bvp3"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_h2yge")
+
+[node name="main" type="Node" unique_id=518055391]
+script = ExtResource("37_main_script")
+
+[node name="MountainBackground" type="CanvasLayer" parent="." unique_id=1219425511 groups=["day_night_background"]]
+layer = -95
+script = ExtResource("17_mountain_script")
+player_path = NodePath("../Player")
+
+[node name="Panorama" type="Sprite2D" parent="MountainBackground" unique_id=1009738050]
+texture_filter = 1
+position = Vector2(3, 38)
+texture = ExtResource("16_mountains")
+centered = false
+
+[node name="DayNightCycle" type="Node" parent="." unique_id=142846904 groups=["day_night_cycle"]]
+script = ExtResource("3_4kvod")
+
+[node name="GroundTileMap" type="TileMapLayer" parent="." unique_id=1638824217]
+tile_map_data = PackedByteArray("AAAAAAgAAAABAAAAAAAAAAcAAAABAAAAAAAAAAYAAAACAAAAAAAAAAUAAAACAAAAAGAAAAQAAAAAAAAAAAABAAsAAAABAAAAAAACAAsAAAAAAAAAAAADAAsAAAAAAAAAAAAEAAsAAAAAAAAAAAAFAAsAAAAAAAAAAAAGAAsAAAAAAAAAAAAHAAsAAAAAAAAAAAAIAAsAAAAAAAAAAAAJAAsAAAAAAAAAAAAKAAsAAAAAAAAAAAALAAsAAAAAAAAAAAAMAAsAAAAAAAAAAAANAAsAAAAAAAAAAAAOAAsAAAAAAAAAAAAPAAsAAAAAAAAAAAAQAAsAAAAAAAAAAAARAAsAAAAAAAAAAAASAAsAAAAAAAAAAAATAAsAAAAAAAAAAAAUAAsAAAAAAAAAAAAVAAsAAAAAAAAAAAAWAAsAAAAAAAAAAAAAAAkAAAABAAAAAAAAAAoAAAABAAAAAAAAAAsAAAABAAAAAAABAAoAAAABAAAAAAABAAkAAAABAAAAAAABAAgAAAAAAAAAAAAXAAsAAAAAAAAAAAAYAAsAAAAAAAAAAAAZAAsAAAAAAAAAAAAaAAsAAAAAAAAAAAAbAAsAAAAAAAAAAAAcAAsAAAAAAAAAAAAdAAsAAAAAAAAAAAAeAAsAAAAAAAAAAAAfAAsAAAAAAAAAAAAgAAsAAAAAAAAAAAAhAAsAAAAAAAAAAAAiAAsAAAAAAAAAAAAjAAsAAAAAAAAAAAAkAAsAAAAAAAAAAAAlAAsAAAAAAAAAAAAmAAsAAAAAAAAAAAAnAAsAAAAAAAAAAAAoAAsAAAAAAAAAAAApAAsAAAAAAAAAAAAqAAsAAAAAAAAAAAArAAsAAAAAAAAAAAAsAAsAAAAAAAAAAAAtAAsAAAAAAAAAAAAuAAsAAAAAAAAAAAAvAAsAAAAAAAAAAAAwAAsAAAAAAAAAAAAxAAsAAAAAAAAAAAAyAAsAAAAAAAAAAAAzAAsAAAAAAAAAAAA0AAsAAAAAAAAAAAA1AAsAAAAAAAAAAAA2AAsAAAAAAAAAAAA3AAsAAAAAAAAAAAA4AAsAAAAAAAAAAAA5AAsAAAAAAAAAAAA6AAsAAAAAAAAAAAA7AAsAAAAAAAAAAAA8AAsAAAAAAAAAAAA9AAsAAAAAAAAAAAA+AAsAAAAAAAAAAABAAAsAAAAAAAAAAAA/AAsAAAAAAAAAAABBAAsAAAAAAAAAAABCAAsAAAAAAAAAAABDAAsAAAAAAAAAAABEAAsAAAAAAAAAAABFAAsAAAAAAAAAAABGAAsAAAAAAAAAAABHAAsAAAAAAAAAAABIAAsAAAAAAAAAAABJAAsAAAAAAAAAAABKAAsAAAAAAAAAAABLAAsAAAAAAAAAAABMAAsAAAAAAAAAAABNAAsAAAAAAAAAAABOAAsAAAABAAAAAABOAAoAAAABAAAAAABOAAkAAAABAAAAAABOAAgAAAABAAAAAABPAAsAAAABAAAAAABPAAoAAAABAAAAAABPAAkAAAABAAAAAABPAAgAAAABAAAAAABPAAcAAAABAAAAAABPAAYAAAABAAAAAABPAAUAAAABAAAAAABPAAQAAAABAAAAAABPAAMAAAABAAAAAABQAAsAAAABAAAAAABQAAoAAAABAAAAAABQAAkAAAABAAAAAABQAAgAAAABAAAAAABQAAcAAAABAAAAAABQAAYAAAABAAAAAABQAAUAAAABAAAAAABQAAQAAAABAAAAAABQAAMAAAABAAAAAABRAAsAAAABAAAAAABRAAoAAAABAAAAAABRAAkAAAABAAAAAABRAAgAAAABAAAAAABRAAcAAAABAAAAAABRAAYAAAABAAAAAABRAAUAAAABAAAAAABRAAQAAAABAAAAAABRAAMAAAABAAAAAABOAAcAAAAAAAAAAAD//wMAAAABAAAAAAD//wQAAAABAAAAAAD//wUAAAABAAAAAAD//wYAAAABAAAAAAD//wcAAAABAAAAAAD//wgAAAABAAAAAAD//wkAAAABAAAAAAD//woAAAABAAAAAAD//wsAAAABAAAAAAD+/wMAAAABAAAAAAD+/wQAAAABAAAAAAD+/wUAAAABAAAAAAD+/wYAAAABAAAAAAD+/wcAAAABAAAAAAD+/wgAAAABAAAAAAD+/wkAAAABAAAAAAD+/woAAAABAAAAAAD+/wsAAAABAAAAAAD9/wMAAAABAAAAAAD9/wQAAAABAAAAAAD9/wUAAAABAAAAAAD9/wYAAAABAAAAAAD9/wcAAAABAAAAAAD9/wgAAAABAAAAAAD9/wkAAAABAAAAAAD9/woAAAABAAAAAAD9/wsAAAABAAAAAAD9/wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD//wIAAAAAAAAAAABRAAIAAAAAAAAAAABQAAIAAAAAAAAAAABPAAIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_1bvp3")
+script = ExtResource("18_ground_script")
+
+[node name="Trees" type="Node2D" parent="." unique_id=1571176110]
+
+[node name="ZelkovaLeft" parent="Trees" unique_id=1396989502 instance=ExtResource("34_tree_01")]
+position = Vector2(115, 598)
+
+[node name="ZelkovaCenter" parent="Trees" unique_id=1181246021 instance=ExtResource("35_tree_02")]
+position = Vector2(173, 598)
+
+[node name="ZelkovaRight" parent="Trees" unique_id=656284474 instance=ExtResource("36_tree_03")]
+position = Vector2(202, 598)
+
+[node name="ZelkovaLeft2" parent="Trees" unique_id=857694500 instance=ExtResource("34_tree_01")]
+position = Vector2(334, 598)
+
+[node name="ZelkovaCenter2" parent="Trees" unique_id=1850743438 instance=ExtResource("35_tree_02")]
+position = Vector2(531, 598)
+
+[node name="ZelkovaRight2" parent="Trees" unique_id=37609058 instance=ExtResource("36_tree_03")]
+position = Vector2(469, 598)
+
+[node name="ZelkovaLeft3" parent="Trees" unique_id=1754494349 instance=ExtResource("34_tree_01")]
+position = Vector2(676, 598)
+
+[node name="ZelkovaCenter3" parent="Trees" unique_id=693333712 instance=ExtResource("35_tree_02")]
+position = Vector2(725, 598)
+
+[node name="ZelkovaRight3" parent="Trees" unique_id=807074587 instance=ExtResource("36_tree_03")]
+position = Vector2(928, 598)
+
+[node name="ZelkovaLeft4" parent="Trees" unique_id=2105359536 instance=ExtResource("34_tree_01")]
+position = Vector2(1058, 598)
+
+[node name="ZelkovaCenter4" parent="Trees" unique_id=612710915 instance=ExtResource("35_tree_02")]
+position = Vector2(1116, 598)
+
+[node name="ZelkovaRight4" parent="Trees" unique_id=2105833730 instance=ExtResource("36_tree_03")]
+position = Vector2(1145, 598)
+
+[node name="ZelkovaLeft5" parent="Trees" unique_id=892086476 instance=ExtResource("34_tree_01")]
+position = Vector2(1433, 598)
+
+[node name="ZelkovaCenter5" parent="Trees" unique_id=1133021494 instance=ExtResource("35_tree_02")]
+position = Vector2(1275, 595)
+
+[node name="ZelkovaRight5" parent="Trees" unique_id=619123613 instance=ExtResource("36_tree_03")]
+position = Vector2(1520, 598)
+
+[node name="ZelkovaRight10" parent="Trees" unique_id=396192738 instance=ExtResource("36_tree_03")]
+position = Vector2(3120, 598)
+
+[node name="ZelkovaLeft11" parent="Trees" unique_id=1670961162 instance=ExtResource("34_tree_01")]
+position = Vector2(3256, 594)
+
+[node name="ZelkovaCenter11" parent="Trees" unique_id=519383638 instance=ExtResource("35_tree_02")]
+position = Vector2(3373, 598)
+
+[node name="ZelkovaRight11" parent="Trees" unique_id=1136546297 instance=ExtResource("36_tree_03")]
+position = Vector2(3456, 599)
+
+[node name="ZelkovaLeft12" parent="Trees" unique_id=2067849734 instance=ExtResource("34_tree_01")]
+position = Vector2(3584, 597)
+
+[node name="ZelkovaCenter12" parent="Trees" unique_id=1168422182 instance=ExtResource("35_tree_02")]
+position = Vector2(3731, 598)
+
+[node name="ZelkovaRight12" parent="Trees" unique_id=1925735133 instance=ExtResource("36_tree_03")]
+position = Vector2(3808, 592)
+
+[node name="ZelkovaLeft13" parent="Trees" unique_id=1957178869 instance=ExtResource("34_tree_01")]
+position = Vector2(3997, 596)
+
+[node name="ZelkovaCenter13" parent="Trees" unique_id=2046368872 instance=ExtResource("35_tree_02")]
+position = Vector2(4180, 595)
+
+[node name="ZelkovaRight13" parent="Trees" unique_id=1531998042 instance=ExtResource("36_tree_03")]
+position = Vector2(4128, 598)
+
+[node name="ZelkovaLeft14" parent="Trees" unique_id=359689483 instance=ExtResource("34_tree_01")]
+position = Vector2(4253, 597)
+
+[node name="ZelkovaCenter14" parent="Trees" unique_id=694691799 instance=ExtResource("35_tree_02")]
+position = Vector2(4389, 596)
+
+[node name="ZelkovaRight14" parent="Trees" unique_id=1064852128 instance=ExtResource("36_tree_03")]
+position = Vector2(4502, 594)
+
+[node name="ZelkovaLeft15" parent="Trees" unique_id=345736482 instance=ExtResource("34_tree_01")]
+position = Vector2(4633, 598)
+
+[node name="ZelkovaCenter15" parent="Trees" unique_id=382963499 instance=ExtResource("35_tree_02")]
+position = Vector2(4691, 598)
+
+[node name="ZelkovaRight15" parent="Trees" unique_id=1079085243 instance=ExtResource("36_tree_03")]
+position = Vector2(4720, 598)
+
+[node name="ZelkovaRight16" parent="Trees" unique_id=1478354039 instance=ExtResource("36_tree_03")]
+position = Vector2(4976, 596)
+
+[node name="ZelkovaLeft16" parent="Trees" unique_id=1764397187 instance=ExtResource("34_tree_01")]
+position = Vector2(4769, 598)
+
+[node name="ZelkovaCenter16" parent="Trees" unique_id=1021258451 instance=ExtResource("35_tree_02")]
+position = Vector2(4918, 596)
+
+[node name="ZelkovaRight17" parent="Trees" unique_id=1000548674 instance=ExtResource("36_tree_03")]
+position = Vector2(4943, 593)
+
+[node name="ZelkovaRight18" parent="Trees" unique_id=459245303 instance=ExtResource("36_tree_03")]
+position = Vector2(4824, 599)
+
+[node name="Buildings" type="Node2D" parent="." unique_id=1021423443]
+
+[node name="Blacksmith" parent="Buildings" unique_id=1375963234 instance=ExtResource("6_blacksmith")]
+position = Vector2(2125, 631)
+
+[node name="RestorationLab" parent="Buildings" unique_id=1245602258 instance=ExtResource("7_lab")]
+position = Vector2(2920, 639)
+
+[node name="Mine" parent="Buildings" unique_id=157611483 instance=ExtResource("8_mine")]
+position = Vector2(1753, 639)
+
+[node name="Gwana" parent="Buildings" unique_id=2045833090 instance=ExtResource("9_gwana")]
+position = Vector2(2509, 659)
+
+[node name="DefenseWalls" type="Node2D" parent="." unique_id=185342823]
+
+[node name="MineBlacksmithWall" parent="DefenseWalls" unique_id=327180495 instance=ExtResource("42_defense_wall")]
+position = Vector2(1938, 631)
+left_building_path = NodePath("../../Buildings/Mine")
+right_building_path = NodePath("../../Buildings/Blacksmith")
+
+[node name="BlacksmithGwanaWall" parent="DefenseWalls" unique_id=134130461 instance=ExtResource("42_defense_wall")]
+position = Vector2(2312, 631)
+left_building_path = NodePath("../../Buildings/Blacksmith")
+right_building_path = NodePath("../../Buildings/Gwana")
+
+[node name="GwanaRestorationWall" parent="DefenseWalls" unique_id=1626453778 instance=ExtResource("42_defense_wall")]
+position = Vector2(2715, 631)
+left_building_path = NodePath("../../Buildings/Gwana")
+right_building_path = NodePath("../../Buildings/RestorationLab")
+
+[node name="Torches" type="Node2D" parent="." unique_id=938094897]
+
+[node name="Torch" parent="Torches" unique_id=251215021 instance=ExtResource("40_torch")]
+position = Vector2(1939, 679)
+
+[node name="Torch2" parent="Torches" unique_id=312732355 instance=ExtResource("40_torch")]
+position = Vector2(2274, 680)
+
+[node name="Torch3" parent="Torches" unique_id=2061054353 instance=ExtResource("40_torch")]
+position = Vector2(2730, 678)
+
+[node name="Torch4" parent="Torches" unique_id=417401622 instance=ExtResource("40_torch")]
+position = Vector2(3043, 679)
+
+[node name="Torch5" parent="Torches" unique_id=962120395 instance=ExtResource("40_torch")]
+position = Vector2(1616, 680)
+
+[node name="Citizens" type="Node2D" parent="." unique_id=199680897]
+
+[node name="CitizenSpawnPoints" type="Node2D" parent="." unique_id=908634018]
+
+[node name="CitizenSpawn1" type="Marker2D" parent="CitizenSpawnPoints" unique_id=1818577086]
+position = Vector2(1850, 677)
+
+[node name="CitizenSpawn2" type="Marker2D" parent="CitizenSpawnPoints" unique_id=1011513674]
+position = Vector2(2010, 677)
+
+[node name="CitizenSpawn3" type="Marker2D" parent="CitizenSpawnPoints" unique_id=1287483195]
+position = Vector2(2200, 677)
+
+[node name="CitizenSpawn4" type="Marker2D" parent="CitizenSpawnPoints" unique_id=1889475417]
+position = Vector2(2390, 677)
+
+[node name="CitizenSpawn5" type="Marker2D" parent="CitizenSpawnPoints" unique_id=2060315735]
+position = Vector2(2630, 677)
+
+[node name="CitizenSpawn6" type="Marker2D" parent="CitizenSpawnPoints" unique_id=944085489]
+position = Vector2(2810, 677)
+
+[node name="CitizenSpawn7" type="Marker2D" parent="CitizenSpawnPoints" unique_id=1216386100]
+position = Vector2(3010, 677)
+
+[node name="CitizenSpawn8" type="Marker2D" parent="CitizenSpawnPoints" unique_id=1202393383]
+position = Vector2(3160, 677)
+
+[node name="Player" parent="." unique_id=1053247864 instance=ExtResource("2_0xm2m")]
+position = Vector2(356, 677)
+
+[node name="Pickups" type="Node2D" parent="." unique_id=651436790]
+
+[node name="Coin" parent="Pickups" unique_id=17907512 instance=ExtResource("10_coin")]
+position = Vector2(259, 561)
+auto_launch_on_spawn = false
+
+[node name="ArtifactPickups" type="Node2D" parent="Pickups" unique_id=1737254413]
+
+[node name="Animals" type="Node2D" parent="." unique_id=2061144420]
+
+[node name="Passive" type="Node2D" parent="Animals" unique_id=1426062020]
+
+[node name="Hostile" type="Node2D" parent="Animals" unique_id=841390116]
+
+[node name="MobSpawner" type="Node2D" parent="." unique_id=386526494]
+script = ExtResource("38_mob_spawner_script")
+
+[node name="FriendlySpawnPoints" type="Node2D" parent="MobSpawner" unique_id=1814818893]
+
+[node name="LeftFriendlyPoint" type="Marker2D" parent="MobSpawner/FriendlySpawnPoints" unique_id=1333562119]
+position = Vector2(300, 620)
+
+[node name="CenterFriendlyPoint" type="Marker2D" parent="MobSpawner/FriendlySpawnPoints" unique_id=1077232358]
+position = Vector2(850, 620)
+
+[node name="RightFriendlyPoint" type="Marker2D" parent="MobSpawner/FriendlySpawnPoints" unique_id=1891667096]
+position = Vector2(1250, 620)
+
+[node name="HostileSpawnPoints" type="Node2D" parent="MobSpawner" unique_id=1247299544]
+
+[node name="LeftHostilePoint" type="Marker2D" parent="MobSpawner/HostileSpawnPoints" unique_id=1633873440]
+position = Vector2(3554, 644)
+
+[node name="CenterHostilePoint" type="Marker2D" parent="MobSpawner/HostileSpawnPoints" unique_id=1240455742]
+position = Vector2(4125, 635)
+
+[node name="RightHostilePoint" type="Marker2D" parent="MobSpawner/HostileSpawnPoints" unique_id=307801576]
+position = Vector2(4847, 623)
+
+[node name="PauseUI" parent="." unique_id=277735826 instance=ExtResource("4_5bqsx")]
+visible = false
+
+[node name="ArtifactCatalogUI" parent="." unique_id=1099590348 instance=ExtResource("19_catalog_ui")]
+
+[node name="PlayerHUD" parent="." unique_id=892025985 instance=ExtResource("39_player_hud")]
+
+[node name="GameOverUI" parent="." unique_id=1639594650 instance=ExtResource("41_game_over_ui")]
+visible = false

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cncp5a37splk"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3a8uj"]
+
+[node name="Bulid_farm" type="Area2D" unique_id=824250621]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1570659562]
+texture = SubResource("CanvasTexture_3a8uj")

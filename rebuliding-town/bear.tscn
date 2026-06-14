@@ -1,0 +1,57 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://animal.gd" id="1_script"]
+[ext_resource type="SpriteFrames" path="res://animal_bear_frames.tres" id="2_frames"]
+[ext_resource type="SpriteFrames" path="res://effect_claw_frames.tres" id="3_effect"]
+
+[sub_resource type="CapsuleShape2D" id="BodyShape"]
+radius = 22.0
+height = 58.0
+
+[node name="Bear" type="CharacterBody2D" groups=["animal", "hostile_animal"]]
+collision_layer = 4
+collision_mask = 1
+floor_snap_length = 8.0
+script = ExtResource("1_script")
+max_health = 160
+move_speed = 30.0
+attack_power = 20
+aggressive = true
+detection_distance = 190.0
+attack_distance = 58.0
+attack_cooldown = 1.9
+wander_distance = 70.0
+coin_drop_count = 7
+artifact_drop_chance = 0.18
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -45)
+scale = Vector2(0.42, 0.42)
+texture_filter = 1
+sprite_frames = ExtResource("2_frames")
+animation = &"move"
+
+[node name="AttackEffect" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(42, -40)
+scale = Vector2(0.5, 0.5)
+texture_filter = 1
+sprite_frames = ExtResource("3_effect")
+animation = &"effect"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -21)
+rotation = 1.5708
+shape = SubResource("BodyShape")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -34.0
+offset_top = -94.0
+offset_right = 34.0
+offset_bottom = -87.0
+show_percentage = false
+
+[connection signal="animation_finished" from="BodySprite" to="." method="_on_body_sprite_animation_finished"]
+[connection signal="frame_changed" from="BodySprite" to="." method="_on_body_sprite_frame_changed"]
+[connection signal="animation_finished" from="AttackEffect" to="." method="_on_attack_effect_animation_finished"]

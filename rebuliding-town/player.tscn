@@ -1,0 +1,259 @@
+[gd_scene format=3 uid="uid://fqxqqm8q2hgn"]
+
+[ext_resource type="Texture2D" uid="uid://dalxypd305xn6" path="res://assets/player.png" id="1_j5d5a"]
+[ext_resource type="Texture2D" path="res://assets/player_run_6frames.png" id="2_1xwva"]
+[ext_resource type="Script" uid="uid://dr2u6y62ojkls" path="res://player.gd" id="3_djhx0"]
+[ext_resource type="Script" uid="uid://cx6x56ughyty4" path="res://camera_follow.gd" id="4_6x2ml"]
+[ext_resource type="Texture2D" uid="uid://cw4u811eklaxo" path="res://assets/player_attack_recovery.png" id="5_attack"]
+[ext_resource type="Texture2D" uid="uid://ob1w5m7jtvib" path="res://assets/player_sword_trail.png" id="6_trail"]
+[ext_resource type="Texture2D" uid="uid://cj81adflgbf4u" path="res://assets/player_thrust_prepare.png" id="8_thrust_prepare"]
+[ext_resource type="Texture2D" uid="uid://ccpyec7i21idg" path="res://assets/player_thrust_attack.png" id="9_thrust_attack"]
+[ext_resource type="Texture2D" uid="uid://duki212mpieu1" path="res://assets/player_thrust_effect_sheet.png" id="10_thrust_effect"]
+[ext_resource type="Texture2D" path="res://assets/player_thrust_effect_frame_2.png" id="11_thrust_effect_frame_2"]
+[ext_resource type="Texture2D" path="res://assets/player_attack_prepare.png" id="12_attack_prepare"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3pqv"]
+size = Vector2(23, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run_0"]
+atlas = ExtResource("2_1xwva")
+region = Rect2(0, 0, 357, 408)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run_1"]
+atlas = ExtResource("2_1xwva")
+region = Rect2(357, 0, 357, 408)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run_3"]
+atlas = ExtResource("2_1xwva")
+region = Rect2(714, 0, 357, 408)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run_4"]
+atlas = ExtResource("2_1xwva")
+region = Rect2(1071, 0, 357, 408)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run_5"]
+atlas = ExtResource("2_1xwva")
+region = Rect2(1428, 0, 357, 408)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run_6"]
+atlas = ExtResource("2_1xwva")
+region = Rect2(1785, 0, 357, 408)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_player"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_attack")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_attack_prepare")
+}],
+"loop": true,
+"name": &"attack_prepare",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_j5d5a")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run_6")
+}],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_thrust_attack")
+}],
+"loop": true,
+"name": &"thrust_attack",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_thrust_prepare")
+}],
+"loop": true,
+"name": &"thrust_prepare",
+"speed": 1.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trail_0"]
+atlas = ExtResource("6_trail")
+region = Rect2(0, 0, 256, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trail_1"]
+atlas = ExtResource("6_trail")
+region = Rect2(256, 0, 256, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trail_2"]
+atlas = ExtResource("6_trail")
+region = Rect2(512, 0, 256, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trail_3"]
+atlas = ExtResource("6_trail")
+region = Rect2(768, 0, 256, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sword_trail"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trail_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trail_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trail_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trail_3")
+}],
+"loop": false,
+"name": &"slash",
+"speed": 14.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sword_hitbox"]
+size = Vector2(72, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thrust_effect_0"]
+atlas = ExtResource("10_thrust_effect")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thrust_effect_1"]
+atlas = ExtResource("11_thrust_effect_frame_2")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thrust_effect_2"]
+atlas = ExtResource("10_thrust_effect")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thrust_effect_3"]
+atlas = ExtResource("10_thrust_effect")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thrust_effect_4"]
+atlas = ExtResource("10_thrust_effect")
+region = Rect2(2048, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thrust_effect_5"]
+atlas = ExtResource("10_thrust_effect")
+region = Rect2(2560, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_thrust_effect"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thrust_effect_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thrust_effect_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thrust_effect_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thrust_effect_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thrust_effect_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thrust_effect_5")
+}],
+"loop": false,
+"name": &"thrust",
+"speed": 27.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thrust_hitbox"]
+size = Vector2(120, 42)
+
+[node name="Player" type="CharacterBody2D" unique_id=1053247864 groups=["player"]]
+collision_layer = 2
+collision_mask = 1
+floor_snap_length = 8.0
+script = ExtResource("3_djhx0")
+coins = 5
+attack_power = 26
+jump_force = 330.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=276225489]
+position = Vector2(-1.5, 6)
+shape = SubResource("RectangleShape2D_i3pqv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1254482886]
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_player")
+animation = &"run"
+frame_progress = 0.84810364
+
+[node name="SwordTrail" type="AnimatedSprite2D" parent="." unique_id=1091017665]
+visible = false
+texture_filter = 1
+position = Vector2(26, -23.34)
+scale = Vector2(0.64, 0.64)
+sprite_frames = SubResource("SpriteFrames_sword_trail")
+animation = &"slash"
+
+[node name="SwordHitbox" type="Area2D" parent="." unique_id=1192687535]
+position = Vector2(42, -8)
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitbox" unique_id=1898214580]
+shape = SubResource("RectangleShape2D_sword_hitbox")
+
+[node name="ThrustEffect" type="AnimatedSprite2D" parent="." unique_id=1966596968]
+visible = false
+texture_filter = 1
+position = Vector2(55, 2)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_thrust_effect")
+animation = &"thrust"
+
+[node name="ThrustHitbox" type="Area2D" parent="." unique_id=1567968090]
+position = Vector2(66, -8)
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThrustHitbox" unique_id=976640546]
+shape = SubResource("RectangleShape2D_thrust_hitbox")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=653729931]
+zoom = Vector2(3.6, 3.6)
+script = ExtResource("4_6x2ml")
+follow_offset = Vector2(0, -50)
+
+[connection signal="body_entered" from="SwordHitbox" to="." method="_on_sword_hitbox_body_entered"]
+[connection signal="body_entered" from="ThrustHitbox" to="." method="_on_thrust_hitbox_body_entered"]

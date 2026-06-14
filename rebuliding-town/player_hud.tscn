@@ -1,0 +1,281 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://player_hud.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/coin_old_square_hole_pixel.png" id="2_coin"]
+
+[sub_resource type="StyleBoxFlat" id="StyleHealthBackground"]
+bg_color = Color(0.075, 0.055, 0.055, 0.94)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.12, 0.1, 0.1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleHealthFill"]
+bg_color = Color(0.78, 0.075, 0.075, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleCoinPanel"]
+bg_color = Color(0.035, 0.035, 0.04, 0.82)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.18, 0.17, 0.13, 0.9)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleArtifactSlot"]
+bg_color = Color(0.035, 0.035, 0.04, 0.9)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.35, 0.36, 0.4, 0.95)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleMessage"]
+bg_color = Color(0.03, 0.035, 0.04, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.34, 0.58, 0.38, 0.95)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="PlayerHUD" type="CanvasLayer" groups=["player_hud"]]
+layer = 100
+script = ExtResource("1_script")
+
+[node name="DayThreeButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 22.0
+offset_top = 22.0
+offset_right = 222.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 18
+text = "3일차로 변경"
+
+[node name="DayLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -224.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 68.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.96, 0.94, 0.86, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 30
+text = "0 일차"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MessagePanel" type="PanelContainer" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 420.0
+offset_top = 92.0
+offset_right = -420.0
+offset_bottom = 148.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleMessage")
+
+[node name="MessageLabel" type="Label" parent="MessagePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.86, 1, 0.84, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = -54.0
+offset_right = 310.0
+offset_bottom = -26.0
+grow_vertical = 0
+mouse_filter = 2
+show_percentage = false
+theme_override_styles/background = SubResource("StyleHealthBackground")
+theme_override_styles/fill = SubResource("StyleHealthFill")
+value = 100.0
+
+[node name="HealthValue" type="Label" parent="HealthBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 15
+text = "체력 100 / 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoinPanel" type="PanelContainer" parent="."]
+anchors_preset = 3
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -112.0
+offset_right = 146.0
+offset_bottom = -66.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleCoinPanel")
+
+[node name="CoinRow" type="HBoxContainer" parent="CoinPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="CoinIcon" type="TextureRect" parent="CoinPanel/CoinRow"]
+custom_minimum_size = Vector2(38, 38)
+layout_mode = 2
+texture_filter = 1
+texture = ExtResource("2_coin")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CoinCount" type="Label" parent="CoinPanel/CoinRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.9, 0.7, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 22
+text = "엽전 0"
+vertical_alignment = 1
+
+[node name="TownStatusPanel" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -332.0
+offset_top = 82.0
+offset_right = -22.0
+offset_bottom = 306.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleCoinPanel")
+
+[node name="TownStatusLabel" type="Label" parent="TownStatusPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.86, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 16
+text = "마을 운영\n주민  0 / 0명\n광산  0단계 · 하루 +0\n대장간  0단계 · 공격 +0%\n관아  0단계 · 수용 0명\n복원소  0단계\n예상 일일 수입  0엽전\n승리 목표  유물 0/10 · 관아 0/4단계"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArtifactSlots" type="HBoxContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -198.0
+offset_top = -106.0
+offset_right = -22.0
+offset_bottom = -22.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Slot1" type="PanelContainer" parent="ArtifactSlots"]
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 2
+mouse_filter = 1
+tooltip_text = "훼손 유물 1번 칸 · 복원소에서 1키로 복원"
+theme_override_styles/panel = SubResource("StyleArtifactSlot")
+
+[node name="ArtifactSlot1Icon" type="TextureRect" parent="ArtifactSlots/Slot1"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+
+[node name="KeyLabel" type="Label" parent="ArtifactSlots/Slot1"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 22
+text = "1"
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="Slot2" type="PanelContainer" parent="ArtifactSlots"]
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 2
+mouse_filter = 1
+tooltip_text = "훼손 유물 2번 칸 · 복원소에서 2키로 복원"
+theme_override_styles/panel = SubResource("StyleArtifactSlot")
+
+[node name="ArtifactSlot2Icon" type="TextureRect" parent="ArtifactSlots/Slot2"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+
+[node name="KeyLabel" type="Label" parent="ArtifactSlots/Slot2"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 22
+text = "2"
+horizontal_alignment = 0
+vertical_alignment = 0

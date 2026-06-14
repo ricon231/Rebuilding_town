@@ -1,0 +1,155 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://game_over_ui.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleWindow"]
+bg_color = Color(0.055, 0.045, 0.043, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.62, 0.16, 0.12, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleScore"]
+bg_color = Color(0.105, 0.09, 0.085, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.31, 0.26, 0.23, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="GameOverUI" type="CanvasLayer" groups=["game_over_ui"]]
+process_mode = 3
+layer = 250
+script = ExtResource("1_script")
+
+[node name="Overlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.025, 0.012, 0.012, 0.84)
+
+[node name="Window" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -305.0
+offset_right = 310.0
+offset_bottom = 305.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleWindow")
+
+[node name="Margin" type="MarginContainer" parent="Window"]
+layout_mode = 2
+theme_override_constants/margin_left = 38
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 38
+theme_override_constants/margin_bottom = 30
+
+[node name="Column" type="VBoxContainer" parent="Window/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Window/Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.24, 0.18, 1)
+theme_override_font_sizes/font_size = 46
+text = "게임 오버"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Window/Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.67, 0.62, 1)
+theme_override_font_sizes/font_size = 18
+text = "마을 재건 기록"
+horizontal_alignment = 1
+
+[node name="Divider" type="HSeparator" parent="Window/Margin/Column"]
+layout_mode = 2
+
+[node name="ScorePanel" type="PanelContainer" parent="Window/Margin/Column"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleScore")
+
+[node name="ScoreMargin" type="MarginContainer" parent="Window/Margin/Column/ScorePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="ScoreList" type="VBoxContainer" parent="Window/Margin/Column/ScorePanel/ScoreMargin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="BuildingScore" type="Label" parent="Window/Margin/Column/ScorePanel/ScoreMargin/ScoreList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="CitizenScore" type="Label" parent="Window/Margin/Column/ScorePanel/ScoreMargin/ScoreList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="CoinScore" type="Label" parent="Window/Margin/Column/ScorePanel/ScoreMargin/ScoreList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="ArtifactScore" type="Label" parent="Window/Margin/Column/ScorePanel/ScoreMargin/ScoreList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="DayScore" type="Label" parent="Window/Margin/Column/ScorePanel/ScoreMargin/ScoreList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="TotalDivider" type="HSeparator" parent="Window/Margin/Column"]
+layout_mode = 2
+
+[node name="TotalScore" type="Label" parent="Window/Margin/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.78, 0.25, 1)
+theme_override_font_sizes/font_size = 34
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Window/Margin/Column"]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="RestartButton" type="Button" parent="Window/Margin/Column/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "다시 시작"
+
+[node name="QuitButton" type="Button" parent="Window/Margin/Column/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "게임 종료"

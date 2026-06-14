@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://animal.gd" id="1_script"]
+[ext_resource type="SpriteFrames" path="res://animal_deer_frames.tres" id="2_frames"]
+
+[sub_resource type="CapsuleShape2D" id="BodyShape"]
+radius = 13.0
+height = 38.0
+
+[node name="Deer" type="CharacterBody2D" groups=["animal"]]
+collision_layer = 4
+collision_mask = 1
+floor_snap_length = 8.0
+script = ExtResource("1_script")
+max_health = 45
+move_speed = 50.0
+wander_distance = 150.0
+wander_change_interval = 3.0
+coin_drop_count = 2
+artifact_drop_chance = 0.04
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -41)
+scale = Vector2(0.38, 0.38)
+texture_filter = 1
+sprite_frames = ExtResource("2_frames")
+animation = &"move"
+
+[node name="AttackEffect" type="AnimatedSprite2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+rotation = 1.5708
+shape = SubResource("BodyShape")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -28.0
+offset_top = -87.0
+offset_right = 28.0
+offset_bottom = -80.0
+show_percentage = false
+
+[connection signal="animation_finished" from="BodySprite" to="." method="_on_body_sprite_animation_finished"]
+[connection signal="frame_changed" from="BodySprite" to="." method="_on_body_sprite_frame_changed"]
+[connection signal="animation_finished" from="AttackEffect" to="." method="_on_attack_effect_animation_finished"]

@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://idpjomapocmk"]
+
+[ext_resource type="Script" uid="uid://ryeiornojjeb" path="res://upgrade_building.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://2s3fh13rftc8" path="res://assets/gwana_tier01_humble.png" id="2_tier1"]
+[ext_resource type="Texture2D" uid="uid://c4hoolw31lr6k" path="res://assets/gwana_tier02_office.png" id="3_tier2"]
+[ext_resource type="Texture2D" uid="uid://2w1ds8ych2gb" path="res://assets/gwana_tier03_formal.png" id="4_tier3"]
+[ext_resource type="Texture2D" uid="uid://b00ehvjusmdlr" path="res://assets/gwana_tier04_main.png" id="5_tier4"]
+[ext_resource type="Texture2D" uid="uid://bpxloxvncxs35" path="res://assets/construction_wall_gwana_tier04.png" id="6_construction"]
+[ext_resource type="Texture2D" path="res://assets/gwana_rubble.png" id="7_rubble"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interaction"]
+size = Vector2(160, 80)
+
+[node name="GwanaBuilding" type="Node2D" unique_id=1272996305]
+script = ExtResource("1_script")
+construction_cover = ExtResource("6_construction")
+interaction_width = 160.0
+interaction_height = 80.0
+
+[node name="Stages" type="Node2D" parent="." unique_id=773583463]
+
+[node name="Stage0" type="Sprite2D" parent="Stages"]
+texture_filter = 1
+position = Vector2(0, -75)
+texture = ExtResource("7_rubble")
+
+[node name="Stage1" type="Sprite2D" parent="Stages" unique_id=1393243925]
+visible = false
+texture_filter = 1
+position = Vector2(0, -75)
+texture = ExtResource("2_tier1")
+
+[node name="Stage2" type="Sprite2D" parent="Stages" unique_id=570582521]
+visible = false
+texture_filter = 1
+position = Vector2(-1, -75)
+texture = ExtResource("3_tier2")
+
+[node name="Stage3" type="Sprite2D" parent="Stages" unique_id=335053345]
+visible = false
+texture_filter = 1
+position = Vector2(4, -75)
+texture = ExtResource("4_tier3")
+
+[node name="Stage4" type="Sprite2D" parent="Stages" unique_id=1267351713]
+visible = false
+texture_filter = 1
+position = Vector2(4, -75)
+texture = ExtResource("5_tier4")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1017006833]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=604698986]
+shape = SubResource("RectangleShape2D_interaction")
+
+[node name="PromptAnchor" type="Node2D" parent="." unique_id=955663544]
+
+[connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="." method="_on_interaction_area_body_exited"]
